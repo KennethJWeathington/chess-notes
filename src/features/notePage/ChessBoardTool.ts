@@ -1,23 +1,14 @@
 import { BlockTool, API, ToolConfig, BlockToolData } from '@editorjs/editorjs';
 import { Chessground } from 'chessground';
+import { Config } from 'chessground/config';
 import { Api as ChessgroundApi } from 'chessground/api';
-import { DefaultConfig } from './DefaultConfig';
 
-// import {
-//   ConversionConfig,
-//   SanitizerConfig,
-// } from '@editorjs/editorjs/types/configs';
-
-interface TestPluginToolData extends BlockToolData {
-  url: string;
-}
+interface ChessBoardToolData extends BlockToolData, Config {}
 
 export default class ChessBoardTool implements BlockTool {
-  private toolData: TestPluginToolData;
-
+  private toolData: ChessBoardToolData | undefined;
   private div = document.createElement('div');
-  private api: ChessgroundApi | undefined;
-  private fen = 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1';
+  private chessApi: ChessgroundApi | undefined;
 
   constructor({
     api,
@@ -26,9 +17,9 @@ export default class ChessBoardTool implements BlockTool {
   }: {
     api: API;
     config?: ToolConfig;
-    data?: TestPluginToolData;
+    data?: ChessBoardToolData;
   }) {
-    this.toolData = data || { url: '' };
+    this.toolData = data;
   }
 
   static get toolbox() {
@@ -40,29 +31,20 @@ export default class ChessBoardTool implements BlockTool {
   }
 
   render(): HTMLElement {
-    // const board = Chessground(this.div, DefaultConfig);
-    // const board = Chessground(this.div);
+    this.loadChessBoard();
     return this.div;
   }
 
-  rendered() {
-    // const fen = 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1';
-    // // const board = Chessground(this.div, DefaultConfig);
-    // const board = Chessground(this.div, { fen: fen });
-    setTimeout(() => {
-      this.api = Chessground(this.div, { fen: this.fen });
-    }, 1);
-  }
-
-  save(block: HTMLElement): TestPluginToolData {
-    // const input = block as HTMLInputElement;
-    // this.api = Chessground(this.div, { fen: this.fen });
+  save(): ChessBoardToolData {
     return {
-      url: '',
+      fen: this.chessApi?.getFen() || '',
     };
   }
 
-  // validate(toolData: TestPluginToolData) {
-  //   return Boolean(toolData.url.trim());
-  // }
+  loadChessBoard() {
+    //Fix for loading order conflict with editorJS
+    setTimeout(() => {
+      this.chessApi = Chessground(this.div, this.toolData);
+    }, 1);
+  }
 }

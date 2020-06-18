@@ -11,7 +11,9 @@ interface NotePageProps {}
 export const NotePage: React.FC<NotePageProps> = ({}) => {
   // let editor: EditorJS;
 
-  const data = `{"time":1592409899548,"blocks":[{"type":"paragraph","data":{"text":"sdfsdf"}},{"type":"paragraph","data":{"text":"gggsdf"}},{"type":"board","data":{"url":"testURL"}}],"version":"2.18.0"}`;
+  // const data = `{"time":1592409899548,"blocks":[{"type":"paragraph","data":{"text":"sdfsdf"}},{"type":"paragraph","data":{"text":"gggsdf"}},{"type":"board","data":{"url":"testURL"}}],"version":"2.18.0"}`;
+  const data =
+    '{"time":1592493985004,"blocks":[{"type":"paragraph","data":{"text":"sdfsdf"}},{"type":"paragraph","data":{"text":"gggsdf"}},{"type":"board","data":{"fen":"r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R"}}],"version":"2.18.0"}';
   const testData = JSON.parse(data) as OutputData;
   const [editor, setEditor] = useState<EditorJS>();
   const [testState, setTestState] = useState<string>('Test');
@@ -20,8 +22,10 @@ export const NotePage: React.FC<NotePageProps> = ({}) => {
     setTestState('testing');
 
     try {
-      if (editor) await editor.save();
-      else throw new Error('Editor is null!');
+      if (editor) {
+        const saveDate = await editor.save();
+        console.log(JSON.stringify(saveDate));
+      } else throw new Error('Editor is null!');
     } catch (error) {
       console.log(error);
     }

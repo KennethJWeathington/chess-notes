@@ -1,0 +1,37 @@
+
+Board Plugin:
+  ☐ Allow resizing
+  ☐ Multiple boards?
+  ☐ PGN and replay support
+
+Tool Sidebar:
+  ☐ Theme select
+  ☐ Orientation select
+  ☐ Coordinates toggle
+  ☐ Reset Position button
+  ☐ Add pieces row toggle
+  ☐ Save/edit toggle
+  ☐ Stockfish toggle
+  ☐ Caption toggle
+  
+Paging: 
+  ☐ Page selection
+  ☐ Page Creation
+  ☐ Page Grouping
+  ☐ Read-only public view
+
+User Accounts:
+  ☐ Account creation
+  ☐ Account Signin
+  ☐ OAuth
+  ☐ Sessioning
+
+Misc:
+  ☐ Landing Page
+
+
+UI Libraries to look at:
+☐ https://react-hook-form.com
+☐ https://material-ui.com
+☐ https://chakra-ui.com
+☐ https://tailwindcss.com
