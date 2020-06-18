@@ -19,8 +19,12 @@ export const NotePage: React.FC<NotePageProps> = ({}) => {
   async function save() {
     setTestState('testing');
 
-    if (editor) await editor.save();
-    else throw new Error('Editor is null!');
+    try {
+      if (editor) await editor.save();
+      else throw new Error('Editor is null!');
+    } catch (error) {
+      console.log(error);
+    }
     // const saveDataJSON = JSON.stringify(saveData);
     // console.log(saveData);
     // console.log(saveDataJSON);

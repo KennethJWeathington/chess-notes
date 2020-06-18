@@ -1,5 +1,7 @@
 import { BlockTool, API, ToolConfig, BlockToolData } from '@editorjs/editorjs';
 import { Chessground } from 'chessground';
+import { Api as ChessgroundApi } from 'chessground/api';
+import { DefaultConfig } from './DefaultConfig';
 
 // import {
 //   ConversionConfig,
@@ -13,7 +15,9 @@ interface TestPluginToolData extends BlockToolData {
 export default class ChessBoardTool implements BlockTool {
   private toolData: TestPluginToolData;
 
-  private input = document.createElement('input');
+  private div = document.createElement('div');
+  private api: ChessgroundApi | undefined;
+  private fen = 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1';
 
   constructor({
     api,
@@ -36,19 +40,29 @@ export default class ChessBoardTool implements BlockTool {
   }
 
   render(): HTMLElement {
-    const div = document.createElement('div');
-    const board = Chessground(div);
-    return div;
+    // const board = Chessground(this.div, DefaultConfig);
+    // const board = Chessground(this.div);
+    return this.div;
+  }
+
+  rendered() {
+    // const fen = 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1';
+    // // const board = Chessground(this.div, DefaultConfig);
+    // const board = Chessground(this.div, { fen: fen });
+    setTimeout(() => {
+      this.api = Chessground(this.div, { fen: this.fen });
+    }, 1);
   }
 
   save(block: HTMLElement): TestPluginToolData {
     // const input = block as HTMLInputElement;
+    // this.api = Chessground(this.div, { fen: this.fen });
     return {
-      url: this.input.value,
+      url: '',
     };
   }
 
-  validate(toolData: TestPluginToolData) {
-    return Boolean(toolData.url.trim());
-  }
+  // validate(toolData: TestPluginToolData) {
+  //   return Boolean(toolData.url.trim());
+  // }
 }
