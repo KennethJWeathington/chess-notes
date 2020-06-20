@@ -1,12 +1,13 @@
 import { BlockTool, API, ToolConfig, BlockToolData } from '@editorjs/editorjs';
 import { Chessground } from 'chessground';
 import { Config } from 'chessground/config';
-import { State } from 'chessground/state';
 import { Api as ChessgroundApi } from 'chessground/api';
 
 interface ChessBoardToolData extends BlockToolData, Config {}
 
-const boardSettings = {};
+const defaultBoardSettings: Config = {
+  animation: { enabled: true, duration: 500 },
+};
 
 export default class ChessBoardTool implements BlockTool {
   private toolData: ChessBoardToolData | undefined;
@@ -34,8 +35,14 @@ export default class ChessBoardTool implements BlockTool {
   }
 
   render(): HTMLElement {
-    this.loadChessBoard();
     return this.div;
+  }
+
+  rendered() {
+    //Fix for loading order conflict with editorJS
+    setTimeout(() => {
+      this.loadChessBoard();
+    }, 1);
   }
 
   save(): ChessBoardToolData {
@@ -43,11 +50,9 @@ export default class ChessBoardTool implements BlockTool {
   }
 
   loadChessBoard() {
-    //Fix for loading order conflict with editorJS
-    setTimeout(() => {
-      const config: Config = Object.assign(this.toolData, boardSettings);
-      this.chessApi = Chessground(this.div, this.toolData);
-    }, 1);
+    const config: Config = Object.assign({}, defaultBoardSettings);
+    Object.assign(config, this.toolData);
+    this.chessApi = Chessground(this.div, config);
   }
 
   getStateAsConfig(): Config {
