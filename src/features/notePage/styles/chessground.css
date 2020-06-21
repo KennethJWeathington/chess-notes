@@ -40,6 +40,7 @@
 .cg-wrap {
   width: 30vw;
   height: 30vw;
+  margin: 20px auto;
   position: relative;
   display: block;
 }
