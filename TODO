@@ -35,3 +35,6 @@ UI Libraries to look at:
 ☐ https://material-ui.com
 ☐ https://chakra-ui.com
 ☐ https://tailwindcss.com
+
+Bugs:
+☐ Try to reproduce n.closest bug with regular editorjs package
