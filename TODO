@@ -1,12 +1,12 @@
 
 Board Plugin:
-  ☐ Allow resizing
+  ✔ Allow resizing @done(20-06-20 23:48)
   ☐ Multiple boards?
   ☐ PGN and replay support
 
 Tool Sidebar:
   ☐ Theme select
-  ☐ Orientation select
+  ✔ Orientation select @done(20-06-20 23:48)
   ☐ Coordinates toggle
   ☐ Reset Position button
   ☐ Add pieces row toggle
