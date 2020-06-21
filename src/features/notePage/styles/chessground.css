@@ -38,8 +38,9 @@
   background-image: url('../images/pieces/merida/bK.svg');
 }
 .cg-wrap {
-  width: 512px;
-  height: 512px;
+  width: 30vw;
+  height: 30vw;
+  margin: 20px auto;
   position: relative;
   display: block;
 }
