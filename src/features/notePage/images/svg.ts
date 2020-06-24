@@ -11,9 +11,9 @@ export const boardImage = `<?xml version="1.0" encoding="UTF-8" standalone="no"?
    inkscape:version="1.0 (6e3e5246a0, 2020-05-07)"
    id="svg8"
    version="1.1"
-   viewBox="0 0 210 297"
-   height="297mm"
-   width="210mm">
+   viewBox="0 0 100 100"
+   height="15"
+   width="15">
   <defs
      id="defs2" />
   <sodipodi:namedview
