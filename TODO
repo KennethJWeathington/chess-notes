@@ -3,6 +3,7 @@ Board Plugin:
   ✔ Allow resizing @done(20-06-20 23:48)
   ☐ Multiple boards?
   ☐ PGN and replay support
+  ☐ Prevent board removal on backspace
 
 Tool Sidebar:
   ☐ Theme select
@@ -45,6 +46,7 @@ Visual:
 ☐ Copy Lichess' rounding to 8 trick for board
 ☐ Move setting button to very right on media query
 ☐ Move setting bar away from chess board on media query
-☐ Make tooltip appear for custom settings
+✔ Make tooltip appear for custom settings @done(20-06-23 23:10)
 ☐ Adjust z-index for custom settings
 ☐ Adjust board size on media query
+☐ Add board margin to editorjs wrapper

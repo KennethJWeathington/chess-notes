@@ -12,7 +12,7 @@ const defaultBoardSettings: Config = {
 };
 
 const defaultMenuItemLength = 14;
-const defaultMenuItemClasses = ['ce-settings__button', 'ce-tune-move-down'];
+const defaultMenuItemClasses = ['ce-settings__button'];
 
 export default class ChessBoardTool implements BlockTool {
   private api: API | undefined;
@@ -60,6 +60,11 @@ export default class ChessBoardTool implements BlockTool {
     }, 1);
   }
 
+  loadChessBoard() {
+    const config: Config = { ...defaultBoardSettings, ...this.toolData };
+    this.chessApi = Chessground(this.container, config);
+  }
+
   renderSettings() {
     const wrapper = document.createElement('div');
 
@@ -97,15 +102,6 @@ export default class ChessBoardTool implements BlockTool {
     return this.getStateAsConfig();
   }
 
-  loadChessBoard() {
-    const config: Config = { ...defaultBoardSettings, ...this.toolData };
-    this.chessApi = Chessground(this.container, config);
-  }
-
-  swapBoardOrientation() {
-    this.chessApi?.toggleOrientation();
-  }
-
   getStateAsConfig(): Config {
     const state = this.chessApi?.state;
     const config: Config = {
@@ -121,5 +117,9 @@ export default class ChessBoardTool implements BlockTool {
 
     const filteredConfig = removeUndefinedProperties(config);
     return filteredConfig;
+  }
+
+  swapBoardOrientation() {
+    this.chessApi?.toggleOrientation();
   }
 }
